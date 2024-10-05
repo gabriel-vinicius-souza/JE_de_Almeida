@@ -1,0 +1,305 @@
+* {
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Definindo as fontes do site */
+    background-color: #e0dadb; /* Cor de fundo da página */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Logo à esquerda e ícone à direita */
+    align-items: center; /* Centraliza verticalmente os itens */
+    padding: 10px 50px; /* Define o espaçamento interno nos itens */
+    background-color: #f0f8f8; /* Cor da barra de navegação */
+}
+
+.logo img {
+    width: 120px; /* Ajuste a largura da logo */
+    height: auto; /* Ajusta a altura da logo automaticamente */
+}
+
+.navegacao {
+    display: flex;
+    flex: 1;
+    justify-content: center; /* Centraliza o menu no meio da barra */
+}
+
+.nav-links {
+    list-style: none; /* Retira os marcadores de lista */
+    display: flex;
+    gap: 120px; /* Aumenta o espaço entre os itens de navegação para o dobro */
+    margin-top: 20px; /* Margem do topo */
+}
+
+.nav-links a {
+    text-decoration: none; 
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0; /* Ajustado para ser mais proporcional */
+    position: relative; /* Necessário para o efeito de sublinhado */
+}
+
+.nav-links a::after {
+    content: '';
+    display: block;
+    height: 2px; /* Espessura do sublinhado */
+    background-color: #000; /* Cor do sublinhado */
+    width: 100%; /* Largura do sublinhado */
+    position: absolute;
+    bottom: -5px; /* Ajuste para mover o sublinhado para baixo */
+    left: 0;
+    transform: scaleX(0); /* Inicialmente escondido */
+    transition: transform 0.3s ease; /* Animação suave ao mostrar */
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1); /* Mostrar o sublinhado ao passar o mouse */
+}
+
+.cart-icon {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 125px; /* Aumenta a margem à esquerda para mover a imagem mais para a direita */
+}
+
+.cart-icon img {
+    width: 60px; /* Ajuste o tamanho do ícone */
+}
+
+/*Ajustando o meio círculo da página inicial*/
+.pagina-inicial {
+    position: relative;
+    display: inline-block; /* Manter os dois elementos no mesmo nível */
+}
+
+.pagina-inicial img:first-child {
+    width: 75%; /* Tamanho do meio círculo */
+    height: auto; /* Mantém a proporção */
+}
+
+/* Ajustando o avião */
+#aviao {
+    position: absolute;
+    top: 55%; /* Move o avião um pouco mais para baixo */
+    left: 88%; /* Move o avião um pouco mais para a direita */
+    transform: translate(-50%, -50%); /* Centraliza verticalmente em relação ao meio círculo */
+    width: 550px; /* Tamanho do avião */
+}
+
+/* Ajustando o slogan */
+#slogan {
+    position: absolute;
+    top: 55%; /* Move o texto um pouco mais para baixo */
+    left: 21%; /* Move o texto "A SOLUÇÃO..." mais para a esquerda */
+    transform: translate(-50%, -50%); /* Centraliza horizontalmente */
+    width: 400px; /* Diminuindo a largura do slogan */
+    font-size: 3em; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #000000; /* Cor do texto */
+    font-family: 'Arial', sans-serif; /* Fonte */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto */
+    letter-spacing: 2px; /* Espaçamento entre letras */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Eduardo */
+#quem-somos {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente a imagem e o texto */
+    justify-content: center; /* Centraliza horizontalmente todo o conteúdo */
+    margin: 20px;
+    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha em telas menores */
+    padding: 40px; /* Aumenta o espaço interno na seção */
+}
+
+.imagem {
+    flex: 1;
+    max-width: 50%; /* Aumenta a largura máxima da imagem para 50% */
+}
+
+.texto {
+    flex: 1;
+    padding-left: 10px; /* Espaçamento entre a imagem e o texto */
+}
+
+.imagem img {
+    width: 55%; /* Ajustado para um tamanho menor da imagem da rede */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 8px; /* Bordas arredondadas para a imagem */
+    position: relative; /* Necessário para ajustar a posição */
+    left: 20%; /* Mover a imagem um pouco para a direita */
+    top: -10%; /* Mover a imagem um pouco para cima */
+}
+
+#quem-somos h2 {
+    color: #FC1414; /* Cor do título em vermelho */
+    font-size: 2em; /* Reduzindo o tamanho do título */
+    text-align: center; /* Centraliza o título */
+    text-transform: uppercase; /* Deixa o título em caixa alta */
+    margin-bottom: 15px; /* Aumenta o espaço entre o título e o texto */
+}
+
+#quem-somos p {
+    color: #000; /* Cor do texto em preto */
+    line-height: 1.4; /* Altura da linha para melhor leitura */
+    font-size: 0.7; /* Reduzindo o tamanho do texto */
+    text-align: justify; /* Justifica o texto */
+    margin-top: 20px; /* Aumenta o espaço entre o texto e a borda da seção */
+}
+
+/* Seção sobre nós */
+.sobre-nos {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente o conteúdo */
+    text-align: center;
+    margin: 10px 0;
+}
+
+.sobre-nos .container {
+    display: flex;
+    flex-direction: column; /* Altera a direção para coluna */
+    align-items: center; /* Centraliza os itens */
+    width: 100%;
+}
+
+.sobre-nos div {
+    margin: 1px 0; /* Aumenta o espaçamento entre as caixas */
+    padding: 20px; /* Adiciona espaço interno nas caixas */
+}
+
+.sobre-nos img {
+    width: 40px; /* Reduz o tamanho dos ícones */
+    height: 40px;
+}
+
+.sobre-nos h2 {
+    font-size: 24px;
+    color: #FC1414; /* Mudando a cor para vermelho */
+    margin: 15px 0;
+}
+
+.sobre-nos p {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.5;
+}
+
+.sobre-nos ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sobre-nos ul li {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.8;
+}
+
+.sobre-nos ul li strong {
+    color: #000; /* Mantendo o texto das palavras-chave em cor normal */
+}
+.caixa {
+    background-color: #ded7d7; /* Cor de fundo da caixa */
+    border-radius: 15px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    flex: 1; /* Ocupa espaço igual */
+    margin: 10px; /* Margem entre as caixas */
+}
+.sobre-nos .container {
+    display: flex;
+    flex-direction: column; /* Alinha as caixas verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+}
+
+.sobre-nos .container .caixa {
+    width: 650px; /* Defina uma largura fixa para as caixas */
+    margin: 10px; /* Espaçamento entre as caixas */
+    border: 2px solid #ccc; /* Adiciona borda */
+    border-radius: 15px; /* Arredonda as bordas */
+    padding: 15px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+}
+
+.sobre-nos .container {
+    display: flex;
+    flex-direction: column; /* Alinha as caixas verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+}
+
+.sobre-nos .topo {
+    display: flex; /* Permite que as duas caixas fiquem lado a lado */
+    justify-content: center; /* Centraliza as caixas na linha */
+    width: 100%; /* Garante que ocupe toda a largura do contêiner */
+}
+
+.sobre-nos .caixa {
+    width: 300px; /* Largura fixa para as caixas */
+    margin: 10px; /* Espaçamento entre as caixas */
+    border: 2px solid #ccc; /* Adiciona borda */
+    border-radius: 15px; /* Arredonda as bordas */
+    padding: 15px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+}
+
+.sobre-nos .valores {
+    margin-top: 20px; /* Espaçamento acima da caixa inferior */
+}
+.sobre-nos img:hover {
+    opacity: 0.8; /* Aumenta a transparência */
+    transform: scale(1.1); /* Aumenta levemente o tamanho da imagem */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Suaviza a transição */
+}
+
+
+#rodape {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: #f0f8f8;
+    padding: 40px;
+    margin-top: 40px;
+    border-top: 1px solid #ccc; /* Linha superior no rodapé */
+}
+
+.container-rodape {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Define uma largura maior para a seção */
+}
+
+.mapa-rodape iframe {
+    width: 65%; /* Aumenta o tamanho do mapa */
+    height: 200px; /* Altura ajustada */
+    border-radius: 8px;
+}
+
+.fale-conosco-rodape {
+    flex: 1;
+    padding-left: 20px; /* Espaço entre o mapa e a seção de contato */
+}
+
+.fale-conosco-rodape h2 {
+    color: #FC1414; /* Cor do título */
+    font-size: 1.8em; /* Tamanho ajustado */
+    margin-bottom: 15px;
+}
+
+.fale-conosco-rodape p, .fale-conosco-rodape ul {
+    color: #000;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.fale-conosco-rodape ul li {
+    list-style: none;
+    margin-top: 10px;
+}
