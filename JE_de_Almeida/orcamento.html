@@ -1,32 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/orcamento.css">
-    <title>Orçamento</title>
-</head>
-<body>
-    <!--Cabeçalho da página-->
-    <header>
-        <!--Barra de navegação-->
-        <nav class="navbar">
-            <!--Logo superior esquerda-->
+    <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="css/orcamento.css">
+            <script>
+                function adicionarItem() {
+                    const container = document.getElementById('itensContainer');
+                    const newItem = document.createElement('div');
+                    newItem.classList.add('item');
+                    newItem.innerHTML = `
+                            <select class="tipo" required>
+                            <option value="">Selecione o Tipo da Peça</option>
+                            <option value="Parafusos">Parafusos</option>
+                            <option value="Porcas">Porcas</option>
+                            <option value="Arruelas">Arruelas</option>
+                            <option value="Conexões">Conexões</option>
+                            <option value="Rebites Sólidos">Rebites Sólidos</option>
+                            <option value="Rebites Cherrys">Rebites Cherrys</option>
+                            <option value="Dzus">Dzus</option>
+                            <option value="Clecoss">Clecoss</option>
+                            </select>
+                            <input type="number" class="quantidade" placeholder="Quantidade de Peças" min="1" required>
+                            <button type="button" onclick="removerItem(this)">Remover</button>
+                                        `;
+                    container.appendChild(newItem);
+                }
+                function removerItem(button) {
+                    const item = button.parentNode;
+                    item.parentNode.removeChild(item);
+                }
+                function enviarOrcamento() {
+                    const nome = document.getElementById('nome').value;
+                    const itens = document.querySelectorAll('.item');
+                    let mensagem = `Nome: ${nome}\nPeças:\n`;
+                    itens.forEach(item => {
+                        const tipo = item.querySelector('.tipo').value;
+                        const quantidade = item.querySelector('.quantidade').value;
+                        if (quantidade > 0) {
+                            mensagem += `- Tipo: ${tipo}, Quantidade: ${quantidade}\n`;
+                        }
+                    });
+                    const numero = '5519994673424'; // Número com o código do Brasil
+                    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+                    window.open(url, '_blank');
+                }
+    </script>
+            <title>Orçamento</title>
+        </head>
+        
+    <body>
+        <header>
+            <nav class="navbar">
             <div class="logo">
-                <img src="./imagens/logo.png" alt="Logo JE de Almeida">
+            <img src="./imagens/logo.png" alt="Logo JE de Almeida">
             </div>
-
-            <!--Navegação-->
             <div class="navegacao">
-                <ul class="nav-links">
-                    <li><a href="index.html">PAGINA INICIAL</a></li>
-                    <li><a href="#">PRODUTOS</a></li>
-                    <li><a href="servicos.html">SERVIÇOS</a></li>
-                </ul>
+            <ul class="nav-links">
+            <li><a href="#quem-somos">QUEM SOMOS</a></li>
+            <li><a href="#">PRODUTOS</a></li>
+            <li><a href="servicos.html">SERVIÇOS</a></li>
+            </ul>
+            <div class="cart-icon">
+            <a href="orcamento.html"><img src="imagens/orcamento.png" alt="Carrinho de Compras"></a>
             </div>
-        </nav>
-        <!--Fim Cabeçalho da página-->
-    </header>
-
-</body>
+            </div>
+            </nav>
+        </header>
+        <main>
+            <h2>Solicitar Orçamento</h2>
+            <div class="form-container">
+            <form id="orcamentoForm">
+            <label for="nome">Nome do Cliente</label>
+            <input type="text" id="nome" placeholder="Nome do Cliente" required>
+            <div id="itensContainer">
+            <div class="item">
+            <select class="tipo" required>
+            <option value="">Selecione o Tipo da Peça</option>
+            <option value="Parafusos">Parafusos</option>
+            <option value="Porcas">Porcas</option>
+            <option value="Arruelas">Arruelas</option>
+            <option value="Conexões">Conexões</option>
+            <option value="Rebites Sólidos">Rebites Sólidos</option>
+            <option value="Rebites Cherrys">Rebites Cherrys</option>
+            <option value="Dzus">Dzus</option>
+            <option value="Clecoss">Clecoss</option>
+            </select>
+            <input type="number" class="quantidade" placeholder="Quantidade de Peças" min="1" required>
+            <button type="button" onclick="removerItem(this)">Remover</button>
+            </div>
+            </div>
+            <button type="button" onclick="adicionarItem()">Adicionar Peça</button>
+            <button type="button" onclick="enviarOrcamento()">Solicitar Orçamento</button>
+            </form>
+            </div>
+        </main>
+    </body>
 </html>
