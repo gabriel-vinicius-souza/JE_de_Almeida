@@ -7,8 +7,8 @@
     <title>Manutenção furadeiras pneumáticas</title>
 </head>
 <body>
-     <!--Cabeçalho da página-->
-     <header>
+    <!--Cabeçalho da página-->
+    <header>
         <!--Barra de navegação-->
         <nav class="navbar">
             <!--Logo superior esquerda-->
@@ -24,7 +24,7 @@
                     <li><a href="#">PRODUTOS</a></li>
                 </ul>
                 <div class="cart-icon">
-                <a href="orcamento.html"><img src="imagens/orcamento.png" alt="Carrinho de Compras"></a>
+                    <a href="orcamento.html"><img src="imagens/orcamento.png" alt="Carrinho de Compras"></a>
                 </div>
             </div>
             <!--Fim Navegação-->
@@ -38,10 +38,31 @@
             <div class="descricao-servico">
                 <h1>Serviço de Manutenção de Máquinas Pneumáticas</h1>
                 <p>Serviço personalizado de manutenção de peças pneumáticas focado nas marcas X, Y e Z.</p>
-                <button class="botao-orcamento">Orçamento</button>
+                
+                <!-- Seletor de Quantidade -->
+                <label>Quantidade:</label>
+                <input type="number" id="quantidadeFuradeira" min="1" value="1">
+
+                <!-- Botão para Adicionar ao Orçamento -->
+                <button class="botao-orcamento" onclick="adicionarAoOrcamento('Furadeira Pneumática', document.getElementById('quantidadeFuradeira').value)">Adicionar ao Orçamento</button>
             </div>
         </div>
     </main>
 
+    <script>
+        // Função para adicionar produtos e quantidade ao orçamento
+        function adicionarAoOrcamento(produto, quantidade) {
+            // Verifica se já existem itens no localStorage
+            let orcamento = JSON.parse(localStorage.getItem('orcamento')) || [];
+
+            // Adiciona o novo produto e quantidade
+            orcamento.push({ produto, quantidade });
+
+            // Salva os dados atualizados no localStorage
+            localStorage.setItem('orcamento', JSON.stringify(orcamento));
+
+            alert(produto + ' adicionado ao orçamento com ' + quantidade + ' unidades.');
+        }
+    </script>
 </body>
 </html>

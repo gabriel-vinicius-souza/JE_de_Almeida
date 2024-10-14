@@ -1,99 +1,114 @@
 <!DOCTYPE html>
-    <html lang="pt-br">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="css/orcamento.css">
-            <script>
-                function adicionarItem() {
-                    const container = document.getElementById('itensContainer');
-                    const newItem = document.createElement('div');
-                    newItem.classList.add('item');
-                    newItem.innerHTML = `
-                            <select class="tipo" required>
-                            <option value="">Selecione o Tipo da Peça</option>
-                            <option value="Parafusos">Parafusos</option>
-                            <option value="Porcas">Porcas</option>
-                            <option value="Arruelas">Arruelas</option>
-                            <option value="Conexões">Conexões</option>
-                            <option value="Rebites Sólidos">Rebites Sólidos</option>
-                            <option value="Rebites Cherrys">Rebites Cherrys</option>
-                            <option value="Dzus">Dzus</option>
-                            <option value="Clecoss">Clecoss</option>
-                            </select>
-                            <input type="number" class="quantidade" placeholder="Quantidade de Peças" min="1" required>
-                            <button type="button" onclick="removerItem(this)">Remover</button>
-                                        `;
-                    container.appendChild(newItem);
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/orcamento.css">
+    <title>Orçamento</title>
+    <script>
+        // Função para adicionar um item manualmente pelo botão
+        function adicionarItem(tipo = '', quantidade = 1) {
+            const container = document.getElementById('itensContainer');
+            const newItem = document.createElement('div');
+            newItem.classList.add('item');
+            newItem.innerHTML = `
+                <select class="tipo" required>
+                    <option value="">Selecione o Tipo da Peça</option>
+                    <option value="Furadeira Pneumática" ${tipo === 'Furadeira Pneumática' ? 'selected' : ''}>Furadeira Pneumática</option>
+                    <option value="Parafusos" ${tipo === 'Parafusos' ? 'selected' : ''}>Parafusos</option>
+                    <option value="Porcas" ${tipo === 'Porcas' ? 'selected' : ''}>Porcas</option>
+                    <option value="Arruelas" ${tipo === 'Arruelas' ? 'selected' : ''}>Arruelas</option>
+                    <option value="Conexões" ${tipo === 'Conexões' ? 'selected' : ''}>Conexões</option>
+                    <option value="Rebites Sólidos" ${tipo === 'Rebites Sólidos' ? 'selected' : ''}>Rebites Sólidos</option>
+                    <option value="Rebites Cherrys" ${tipo === 'Rebites Cherrys' ? 'selected' : ''}>Rebites Cherrys</option>
+                    <option value="Dzus" ${tipo === 'Dzus' ? 'selected' : ''}>Dzus</option>
+                    <option value="Clecoss" ${tipo === 'Clecoss' ? 'selected' : ''}>Clecoss</option>
+                </select>
+                <input type="number" class="quantidade" placeholder="Quantidade de Peças" min="1" value="${quantidade}" required>
+                <button type="button" onclick="removerItem(this)">Remover</button>
+            `;
+            container.appendChild(newItem);
+        }
+
+        // Função para remover um item
+        function removerItem(button) {
+            const item = button.parentNode;
+            const tipo = item.querySelector('.tipo').value;
+            const quantidade = item.querySelector('.quantidade').value;
+
+            // Remover do DOM
+            item.parentNode.removeChild(item);
+
+            // Atualizar o localStorage
+            let orcamento = JSON.parse(localStorage.getItem('orcamento')) || [];
+            orcamento = orcamento.filter(produto => !(produto.produto === tipo && produto.quantidade == quantidade));
+            localStorage.setItem('orcamento', JSON.stringify(orcamento));
+        }
+
+        // Função para enviar o orçamento via WhatsApp
+        function enviarOrcamento() {
+            const nome = document.getElementById('nome').value;
+            const itens = document.querySelectorAll('.item');
+            let mensagem = `Nome: ${nome}\nPeças:\n`;
+            itens.forEach(item => {
+                const tipo = item.querySelector('.tipo').value;
+                const quantidade = item.querySelector('.quantidade').value;
+                if (quantidade > 0) {
+                    mensagem += `- Tipo: ${tipo}, Quantidade: ${quantidade}\n`;
                 }
-                function removerItem(button) {
-                    const item = button.parentNode;
-                    item.parentNode.removeChild(item);
-                }
-                function enviarOrcamento() {
-                    const nome = document.getElementById('nome').value;
-                    const itens = document.querySelectorAll('.item');
-                    let mensagem = `Nome: ${nome}\nPeças:\n`;
-                    itens.forEach(item => {
-                        const tipo = item.querySelector('.tipo').value;
-                        const quantidade = item.querySelector('.quantidade').value;
-                        if (quantidade > 0) {
-                            mensagem += `- Tipo: ${tipo}, Quantidade: ${quantidade}\n`;
-                        }
-                    });
-                    const numero = '5519994673424'; // Número com o código do Brasil
-                    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-                    window.open(url, '_blank');
-                }
+            });
+            const numero = '5519994673424'; // Número com o código do Brasil
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        }
+
+        // Função para carregar os itens salvos no localStorage
+        function carregarItensDoOrcamento() {
+            const orcamento = JSON.parse(localStorage.getItem('orcamento')) || [];
+            orcamento.forEach(item => {
+                adicionarItem(item.produto, item.quantidade);
+            });
+        }
+
+        // Chamar a função para carregar os itens ao abrir a página
+        window.onload = carregarItensDoOrcamento;
     </script>
-            <title>Orçamento</title>
-        </head>
-        
-    <body>
-        <header>
-            <nav class="navbar">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
             <div class="logo">
-            <img src="./imagens/logo.png" alt="Logo JE de Almeida">
+                <img src="./imagens/logo.png" alt="Logo JE de Almeida">
             </div>
             <div class="navegacao">
-            <ul class="nav-links">
-            <li><a href="#quem-somos">QUEM SOMOS</a></li>
-            <li><a href="#">PRODUTOS</a></li>
-            <li><a href="servicos.html">SERVIÇOS</a></li>
-            </ul>
-            <div class="cart-icon">
-            <a href="orcamento.html"><img src="imagens/orcamento.png" alt="Carrinho de Compras"></a>
+                <ul class="nav-links">
+                    <li><a href="#quem-somos">QUEM SOMOS</a></li>
+                    <li><a href="#">PRODUTOS</a></li>
+                    <li><a href="servicos.html">SERVIÇOS</a></li>
+                </ul>
+                <div class="cart-icon">
+                    <a href="orcamento.html"><img src="imagens/orcamento.png" alt="Carrinho de Compras"></a>
+                </div>
             </div>
-            </div>
-            </nav>
-        </header>
-        <main>
-            <h2>Solicitar Orçamento</h2>
-            <div class="form-container">
+        </nav>
+    </header>
+
+    <main>
+        <h2>Solicitar Orçamento</h2>
+        <div class="form-container">
             <form id="orcamentoForm">
-            <label for="nome">Nome do Cliente</label>
-            <input type="text" id="nome" placeholder="Nome do Cliente" required>
-            <div id="itensContainer">
-            <div class="item">
-            <select class="tipo" required>
-            <option value="">Selecione o Tipo da Peça</option>
-            <option value="Parafusos">Parafusos</option>
-            <option value="Porcas">Porcas</option>
-            <option value="Arruelas">Arruelas</option>
-            <option value="Conexões">Conexões</option>
-            <option value="Rebites Sólidos">Rebites Sólidos</option>
-            <option value="Rebites Cherrys">Rebites Cherrys</option>
-            <option value="Dzus">Dzus</option>
-            <option value="Clecoss">Clecoss</option>
-            </select>
-            <input type="number" class="quantidade" placeholder="Quantidade de Peças" min="1" required>
-            <button type="button" onclick="removerItem(this)">Remover</button>
-            </div>
-            </div>
-            <button type="button" onclick="adicionarItem()">Adicionar Peça</button>
-            <button type="button" onclick="enviarOrcamento()">Solicitar Orçamento</button>
+                <label for="nome">Nome do Cliente</label>
+                <input type="text" id="nome" placeholder="Nome do Cliente" required>
+
+                <!-- Container onde os itens serão adicionados -->
+                <div id="itensContainer">
+                    <!-- Itens são adicionados automaticamente aqui -->
+                </div>
+
+                <button type="button" onclick="adicionarItem()">Adicionar Peça</button>
+                <button type="button" onclick="enviarOrcamento()">Solicitar Orçamento</button>
             </form>
-            </div>
-        </main>
-    </body>
+        </div>
+    </main>
+</body>
 </html>
