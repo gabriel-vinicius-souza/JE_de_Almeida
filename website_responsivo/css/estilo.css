@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: white;
+}
+
+.navbar{
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* Estilo do header */
+header{
+    width: 100%;
+    padding: 20px 0;
+}
+
+header .navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img{
+    max-width: 150px;
+}
+
+.nav-links{
+    list-style-type: none;
+}
+
+.nav-links li{
+    display: inline-block;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    text-align: center;
+    color: #f0f8f8;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 15px; /* Ajustado para ser mais proporcional */
+    position: relative;
+}
+  
+.nav-links li a::after {
+    content: "";
+    display: block;
+    height: 2px; /* Espessura do sublinhado */
+    background-color: #f0f8f8; /* Cor do sublinhado */
+    width: 100%; /* Largura do sublinhado */
+    position: absolute;
+    bottom: -5px; /* Ajuste para mover o sublinhado para baixo */
+    left: 0;
+    transform: scaleX(0); /* Inicialmente escondido */
+    transition: transform 0.3s ease; /* Animação suave ao mostrar */
+}
+  
+.nav-links a:hover::after {
+    transform: scaleX(1); /* Mostrar o sublinhado ao passar o mouse */
+}
+
+/* Estilo do hero */
+
+section.hero-site{
+    height: 100vh;
+    background-image: url(../imagens/helice.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.hero-site .txt-hero{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.hero-site .txt-hero h1{
+    font-size: 4em;
+    font-weight: 200;
+    padding: 25px;
+}
+
+.hero-site .txt-hero span{
+    display: block;
+    font-weight: 800;
+}
+
+.hero-site .txt-hero p{
+    font-weight: 300;
+    font-size: 20px;
+}
